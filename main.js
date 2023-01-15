@@ -1,11 +1,10 @@
-let display = document.getElementById('time');
+let display = document.getElementById('time'); //数値表示部の要素獲得し、変数(display)と定義
 let starter = document.getElementById('start');
 let stoper = document.getElementById('stop');
 let reseter = document.getElementById('reset');
 
 let timerId = null;
-let elapsed = 0; //グローバル属性で変数(elapsed)を宣言
-
+let elapsed = 0;
 
 function timeTostring(timer){
   const ms = timer % 10
@@ -19,24 +18,27 @@ function timeTostring(timer){
 
 starter.addEventListener('click',function() {
 
-  starter.disabled = true
-  
+  starter.disabled = true;
+  reseter.disabled = true;
 
   let started = new Date();
     timerId = setInterval(function() {
     let current = Date.now();
-    elapsed =  current - started;  //グローバル変数(elapsed)に経過時間処理を格納
+    elapsed =  current - started;  
     
     display.textContent =  timeTostring(elapsed)
+
     }, 100);
 });
 
 stoper.addEventListener('click',function() {
-  starter.disabled = false
-  clearInterval(timerId)
+  starter.disabled = false;
+  reseter.disabled = false;
+  clearInterval(timerId);
 });
 
 reseter.addEventListener('click',function() {
-   elapsed = 0; //グローバル変数(elapsed)を参照したい場所
-  
+
+  display.textContent = `${0}:${0}:${0}:${0}` //表示部のDOMのテキストを書き換え
+   
 });
